@@ -1,5 +1,6 @@
 package com.example.bankapp.service
 
+import com.example.bankapp.models.Rate
 import com.example.bankapp.models.Transaction
 import retrofit2.Response
 import retrofit2.http.GET
@@ -10,5 +11,8 @@ interface BankService {
 
     @GET("transactions.json")
     suspend fun getTransactions() : ArrayList<Transaction>
+
+    @GET("rates.json")
+    suspend fun getRates() : ArrayList<Rate>
 
 }

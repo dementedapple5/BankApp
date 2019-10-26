@@ -11,9 +11,9 @@ class BankViewModel(private val repository: BankRepository) : ViewModel() {
         emit(repository.getTransactions())
     }
 
-    fun onTransactionsFeteched(transactions: List<Transaction>) : List<Transaction>{
-        val newTransactions = ArrayList<Transaction>()
-        return newTransactions
+    val rates = liveData {
+        emit(repository.getRates())
     }
+
 
 }

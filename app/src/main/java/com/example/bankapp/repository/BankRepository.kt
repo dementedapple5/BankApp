@@ -9,4 +9,7 @@ class BankRepository(val bankService: BankService) {
 
     suspend fun getTransactions() = bankService.getTransactions()
 
+    suspend fun getRates() = bankService.getRates()
+
+
 }
