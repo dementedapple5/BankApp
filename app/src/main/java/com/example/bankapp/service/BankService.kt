@@ -4,11 +4,11 @@ import com.example.bankapp.models.Transaction
 import retrofit2.Response
 import retrofit2.http.GET
 
-val apiUrl =  "http://quiet-stone-2094.herokuapp.com/"
+const val apiUrl =  "http://quiet-stone-2094.herokuapp.com/"
 
 interface BankService {
 
-    @GET("transactions.xm")
-    suspend fun getTransactions() : Transaction
+    @GET("transactions.json")
+    suspend fun getTransactions() : ArrayList<Transaction>
 
 }

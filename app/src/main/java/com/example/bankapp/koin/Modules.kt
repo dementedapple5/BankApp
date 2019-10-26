@@ -3,7 +3,9 @@ package com.example.bankapp.koin
 import com.example.bankapp.repository.BankRepository
 import com.example.bankapp.service.BankService
 import com.example.bankapp.service.apiUrl
+import com.example.bankapp.viewmodel.BankViewModel
 import okhttp3.OkHttpClient
+import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,6 +14,10 @@ val networkModule = module {
     factory { provideOkHttpClient() }
     factory { provideBankService(get()) }
     single { provideRetrofit(get()) }
+}
+
+val viewModelModule = module {
+    viewModel { BankViewModel(get()) }
 }
 
 val repositoryModule = module {

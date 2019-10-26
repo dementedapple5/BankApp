@@ -1,21 +1,19 @@
 package com.example.bankapp.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.bankapp.models.Transaction
 import com.example.bankapp.repository.BankRepository
-import org.koin.android.viewmodel.dsl.viewModel
-import org.koin.dsl.module
-
-val viewModelModule = module {
-    viewModel { BankViewModel(get()) }
-}
 
 class BankViewModel(private val repository: BankRepository) : ViewModel() {
 
-    val transactions: LiveData<Transaction> = liveData {
+    val transactions = liveData {
         emit(repository.getTransactions())
+    }
+
+    fun onTransactionsFeteched(transactions: List<Transaction>) : List<Transaction>{
+        val newTransactions = ArrayList<Transaction>()
+        return newTransactions
     }
 
 }
