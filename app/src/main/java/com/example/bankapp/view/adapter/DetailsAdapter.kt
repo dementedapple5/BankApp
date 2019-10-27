@@ -1,36 +1,36 @@
 package com.example.bankapp.view.adapter
 
-import android.util.Log
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bankapp.R
-import com.example.bankapp.inflate
-import com.example.bankapp.models.Transaction
+import com.example.bankapp.utils.inflate
+import com.example.bankapp.models.TransactionAmount
+import com.example.bankapp.view.activity.DetailActivity
 import kotlinx.android.synthetic.main.transaction_item.view.*
 
 
-class TransactionAdapter(val transactions: List<Transaction>) : RecyclerView.Adapter<TransactionAdapter.TransactionVH>() {
+class DetailsAdapter(val transactions: List<TransactionAmount>) : RecyclerView.Adapter<DetailsAdapter.TransactionVH>() {
 
 
     class TransactionVH(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         private var view: View = itemView
-        private var transaction: Transaction? = null
 
         init {
             itemView.setOnClickListener(this)
         }
 
         override fun onClick(p0: View?) {
-            Log.d("CLICKED", transaction!!.sku)
+            val mContext = itemView.context
+            val showSkuIntent = Intent(mContext, DetailActivity::class.java)
+            mContext.startActivity(showSkuIntent)
         }
 
-        fun bindTransaction(transaction: Transaction){
-            this.transaction = transaction
-            view.sku.setText(transaction.sku)
-            view.amount.setText(transaction.amount.toString())
-            view.currency.setText(transaction.currency)
+        fun bindTransaction(transactionAmount: TransactionAmount){
+            view.amount.text = transactionAmount.amount.toString()
+            view.currency.text = transactionAmount.currency
         }
 
     }

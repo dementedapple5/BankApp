@@ -3,7 +3,8 @@ package com.example.bankapp.koin
 import com.example.bankapp.repository.BankRepository
 import com.example.bankapp.service.BankService
 import com.example.bankapp.service.apiUrl
-import com.example.bankapp.viewmodel.BankViewModel
+import com.example.bankapp.viewmodel.DashboardViewModel
+import com.example.bankapp.viewmodel.DetailViewModel
 import okhttp3.OkHttpClient
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -17,12 +18,14 @@ val networkModule = module {
 }
 
 val viewModelModule = module {
-    viewModel { BankViewModel(get()) }
+    viewModel { DashboardViewModel(get()) }
+    viewModel { DetailViewModel(get()) }
 }
 
 val repositoryModule = module {
     factory { BankRepository(get()) }
 }
+
 
 fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder().baseUrl(apiUrl).client(okHttpClient)
@@ -32,5 +35,6 @@ fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
 fun provideOkHttpClient(): OkHttpClient {
     return OkHttpClient().newBuilder().build()
 }
+
 
 fun provideBankService(retrofit: Retrofit): BankService = retrofit.create(BankService::class.java)
